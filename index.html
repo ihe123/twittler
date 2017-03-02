@@ -25,11 +25,29 @@
     <h1 class="title">Twittler</h1>
     <div id="animated-gif-container"></div>
      <div class="quote">"Whale, hello there!"</div>
+     <div class=box1></div>
   </div>
     <script>
 
       $(document).ready(function(){
+
         var $body = $('body');
+
+         var wrapButton = $("<div class='refreshButton'></div>"); 
+        var button = '<button class=btn-primary type="button">Fresh Tweets</button>'
+        // $(button).text("Fresh Tweets")
+        // $body.append(wrapButton);
+         $body.append($(button).wrap(wrapButton).parent());
+         
+        
+
+        $(".btn-primary").on('click', function(){
+            console.log("here")
+            location.reload();
+        });
+
+
+        
         // $body.html('');
 
         var index = streams.home.length - 1;
@@ -112,13 +130,7 @@
 
         
         //creating button for refreshing the page with new tweets
-        var refreshTweets = $('<button class=btn-primary refreshButton type="button">Fresh Tweets</button>')
-        $body.append(refreshTweets);
-
-        $(refreshTweets).on('click', function(){
-            console.log("here")
-            location.reload();
-        });
+       
 
 
       });
