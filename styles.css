@@ -1,0 +1,28 @@
+.allText{
+    text-align: center;
+}
+
+#animated-gif-container {
+    width:  200px;
+    height: 200px;
+    background-image: url(http://i.giphy.com/qhhamrBnxSKNG.gif);
+    display: block;
+    margin: 0 auto;
+
+}
+
+.top{
+    text-align:center;
+}
+
+.title{
+    text-align: center;
+    font-family: 'Sahitya', serif;
+    font-style: bold; 
+}
+
+.quote{
+    font-size: 20px;
+    font-family: 'Sahitya', serif; 
+}
+
