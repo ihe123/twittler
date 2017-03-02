@@ -1,3 +1,14 @@
+.box1{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.refreshButton{
+    text-align: center;
+}
+
+
+
 .allText{
     text-align: center;
 }
@@ -18,7 +29,7 @@
 .title{
     text-align: center;
     font-family: 'Sahitya', serif;
-    font-style: bold; 
+
 }
 
 .quote{
