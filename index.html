@@ -3,32 +3,65 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    
     <!-- Latest compiled and minified CSS -->
+<link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="styles.css">
+
   
-</script>
+
   </head>
   <body>
+  <div class='top'>
+    <h1 class="title">Twittler</h1>
+    <div id="animated-gif-container"></div>
+     <div class="quote">"Whale, hello there!"</div>
+  </div>
     <script>
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
+        // $body.html('');
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          var $tweet = $('<div class=text></div>');
+          var tweetuser = '@'+tweet.user;
+          var $tweetuser = $('<span></span>')
+
+          
+          $tweetuser.text(tweetuser);
+          $tweetuser.html('<a data-user='+tweet.user+'class="linkUser" href="">'+'@' + tweet.user+'</a>');
+
+          //create timestamps for each set of tweets
+          var timeStamp = tweet.created_at;
+          var $timeStamp = $('<div class=text></div>');
+
+          $timeStamp.text(timeStamp);
+
+          // $tweetuser.wrapAll; 
+          $tweet.text(': ' + tweet.message);
+          $tweetuser.prependTo($tweet);
           $tweet.appendTo($body);
+          
+          $timeStamp.appendTo($body);
+
+
           index -= 1;
         }
+
+        $('.text').wrapAll('<div class=allText>');
+        // $('.allText')addCSS({'align':'center'});
         //creating button for refreshing the page with new tweets
         var refreshTweets = $('<button class=btn-primary refreshButton type="button">Fresh Tweets</button>')
         $body.append(refreshTweets);
