@@ -4,10 +4,17 @@
 }
 
 .refreshButton{
-    text-align: center;
+   text-align: center; 
+
 }
 
+.btn-primary {
+    border-radius: 10px;
+    background: none;
+    color: black;
+   margin: 15px;
 
+}
 
 .allText{
     text-align: center;
