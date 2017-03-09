@@ -33,107 +33,67 @@
 
         var $body = $('body');
 
-         var wrapButton = $("<div class='refreshButton'></div>"); 
+        var wrapButton = $("<div class='refreshButton'></div>"); 
         var button = '<button class=btn-primary type="button">Fresh Tweets</button>'
         // $(button).text("Fresh Tweets")
         // $body.append(wrapButton);
          $body.append($(button).wrap(wrapButton).parent());
          
-        
-
         $(".btn-primary").on('click', function(){
             console.log("here")
             location.reload();
         });
 
+      var index = streams.home.length - 1;
+      while(index >= 0){
 
-        
-        // $body.html('');
+        var tweet = streams.home[index];
+        var username = tweet.user;
+        var tweetText = tweet.message;
+        var timeStamp = tweet.created_at;
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
+        addUsernameToTweetAndTimestamp(username, tweetText, timeStamp);
 
-          var tweet = streams.home[index];
-
-          var username = tweet.user;
-
-          var tweetText = tweet.message;
-
-          var timeStamp = tweet.created_at;
-
-          addUsernameToTweetAndTimestamp(username, tweetText, timeStamp)
-
-          // var $tweet = $('<div class=text></div>');
-          // var tweetuser = '@'+tweet.user;
-          // var $tweetuser = $('<span></span>')
-
-          
-          // $tweetuser.text(tweetuser);
-          // $tweetuser.html('<a data-user='+tweet.user+' class="linkUser" href="">'+'@' + tweet.user+'</a>');
-
-          // //create timestamps for each set of tweets
-          // var timeStamp = tweet.created_at;
-          // var $timeStamp = $('<div class=text></div>');
-
-          // $timeStamp.text(timeStamp);
-
-          // // $tweetuser.wrapAll; 
-          // $tweet.text(': ' + tweet.message);
-          // $tweetuser.prependTo($tweet);
-          // $tweet.appendTo($body);
-          
-          // $timeStamp.appendTo($body);
-
-          index -= 1;
+        index -= 1;
         }
 
-        function addUsernameToTweetAndTimestamp (username, tweet, timestamp) {
+      function addUsernameToTweetAndTimestamp (username, tweet, timestamp) {
         
-          var $tweetuser = $("<span class= 'allText'></span>");
-          $tweetuser.text('@'+username+': ');
-          $tweetuser.html('<a data-user='+username+' class="linkUser" href="">'+'@' + username+ ': '+'</a>');
+        var $tweetuser = $("<span class= 'allText'></span>");
+        $tweetuser.text('@'+username+': ');
+        $tweetuser.html('<a data-user='+username+' class="linkUser" href="">'+'@' + username+ ': '+'</a>');
 
-          var $tweet = $("<div class= 'allText'></div>");
-          $tweet.text(tweet);
+        var $tweet = $("<div class= 'allText'></div>");
+        $tweet.text(tweet);
 
-          $("body").append($tweet);
-          $tweetuser.prependTo($tweet);
+        $("body").append($tweet);
+        $tweetuser.prependTo($tweet);
 
-          var $timeStamp = $("<div class= 'allText'></div>");
-          $timeStamp.text(timestamp);
+        var $timeStamp = $("<div class= 'allText'></div>");
+        $timeStamp.text(timestamp);
 
-  
-         
-          $("body").append($timeStamp);
+        $("body").append($timeStamp);
 
         }
 
+      $('.linkUser').on('click', function(event){
+        event.preventDefault();
+        $(".allText").remove();
+        var userName = $(this).attr('data-user');
+        console.log(streams.users[userName]);
 
-        $('.linkUser').on('click', function(event){
-          event.preventDefault();
-          $(".allText").remove();
-          var userName = $(this).attr('data-user');
-          console.log(streams.users[userName]);
+        var index = streams.users[userName].length-1
+        var tweet;
+        var timeStamp;
 
-          var index = streams.users[userName].length-1
-          var tweet;
-          var timeStamp;
-          while (index>=streams.users[userName].length-5){
-            tweet = streams.users[userName][index].message;
-            timeStamp = streams.users[userName][index].created_at;
-            addUsernameToTweetAndTimestamp(userName, tweet, timeStamp);
-            index -=  1 
-          }
-          
-        });
-
-
-        
-        //creating button for refreshing the page with new tweets
-       
-
-
+        while (index>=streams.users[userName].length-5){
+          tweet = streams.users[userName][index].message;
+          timeStamp = streams.users[userName][index].created_at;
+          addUsernameToTweetAndTimestamp(userName, tweet, timeStamp);
+          index -=  1 
+        }        
       });
+    });
 
     </script>
   </body>
